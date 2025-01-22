@@ -20,5 +20,4 @@ public class AuditAware {
     private Date lastModified;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-
 }
