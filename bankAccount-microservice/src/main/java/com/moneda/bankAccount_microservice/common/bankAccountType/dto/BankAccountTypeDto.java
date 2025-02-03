@@ -13,5 +13,6 @@ public class BankAccountTypeDto {
     private UUID id;
     private String name;
     private String code;
+    private String countryCode;
     private CurrencyDto currency;
 }

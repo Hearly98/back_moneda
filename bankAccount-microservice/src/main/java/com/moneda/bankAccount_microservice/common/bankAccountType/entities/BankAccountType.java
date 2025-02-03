@@ -17,6 +17,8 @@ public class BankAccountType extends AuditAware {
     private UUID id;
     @Column(name = "codigo", length = 250, nullable = false)
     private String code;
+    @Column(name = "codigo_pais", length = 250, nullable = false)
+    private String countryCode;
     @Column(name = "nombre", length = 250, nullable = false)
     private String name;
     @ManyToOne

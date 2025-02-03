@@ -8,5 +8,6 @@ import java.util.UUID;
 public class CreateBankAccountTypeDto {
     private String name;
     private String code;
+    private String countryCode;
     private UUID currency_id;
 }

@@ -15,6 +15,7 @@ public class BankAccountTypeMapper {
         dto.setId(bankAccountType.getId());
         dto.setName(bankAccountType.getName());
         dto.setCode(bankAccountType.getCode());
+        dto.setCountryCode(bankAccountType.getCountryCode());
         dto.setCurrency(currencyMapper.toCurrencyDto(bankAccountType.getCurrency()));
         return dto;
     }

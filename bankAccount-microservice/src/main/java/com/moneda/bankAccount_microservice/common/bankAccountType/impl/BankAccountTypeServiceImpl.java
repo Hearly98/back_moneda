@@ -59,6 +59,7 @@ public class BankAccountTypeServiceImpl implements BankAccountTypeService {
             Currency currency = currencyRepository.findById(createBankAccountTypeDto.getCurrency_id())
                     .orElseThrow(() -> new RuntimeException("Moneda no encontrada"));
             bankAccountType.setCurrency(currency);
+            bankAccountType.setCountryCode(createBankAccountTypeDto.getCountryCode());
             bankAccountType.setCreatedAt(new Date()); //colocará la fecha actual
             bankAccountType.setIsActive(true); //por defecto estará activo al crear
             bankAccountTypeRepository.save(bankAccountType);
@@ -98,6 +99,7 @@ public class BankAccountTypeServiceImpl implements BankAccountTypeService {
             Currency currency = currencyRepository.findById(updateBankAccountTypeDto.getCurrency_id())
                     .orElseThrow(() -> new RuntimeException("Moneda no encontrada"));
             bankAccountType.setCurrency(currency);
+            bankAccountType.setCountryCode(updateBankAccountTypeDto.getCountryCode());
             bankAccountType.setLastModified(new Date()); //colocará la fecha actual
             BankAccountType updateBankAccountType = bankAccountTypeRepository.save(bankAccountType);
 

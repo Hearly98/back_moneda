@@ -12,14 +12,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/api/tipo_cuenta_banco")
 @AllArgsConstructor
 public class BankAccountTypeController {
