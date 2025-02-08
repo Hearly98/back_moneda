@@ -46,8 +46,8 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
             identifierType.setCountryCode(identifier.getCountryCode());
             identifierType.setCreatedAt(new Date());
             identifierType.setIsActive(true);
-            InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
             interbankIdentifierTypeRepository.save(identifierType);
+            InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), identifierTypeDto, HttpStatusResponse.OK.getCode());
         }catch (Exception e){
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(), e.getMessage(), HttpStatusResponse.INTERNAL_ERROR.getCode());
@@ -72,8 +72,8 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
             identifierType.setCode(identifier.getCode());
             identifierType.setCountryCode(identifier.getCountryCode());
             identifierType.setLastModified(new Date());
-            InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
             interbankIdentifierTypeRepository.save(identifierType);
+            InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), identifierTypeDto, HttpStatusResponse.OK.getCode());
         }catch (Exception e) {
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(), e.getMessage(), HttpStatusResponse.INTERNAL_ERROR.getCode());
@@ -87,7 +87,8 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
           if(existingIdentifier.isEmpty()){
               return ResponseEntityCustom.builderResponse(HttpStatusResponse.NOT_FOUND.getKey(), null, HttpStatusResponse.NOT_FOUND.getCode());
           }
-          return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), existingIdentifier, HttpStatusResponse.OK.getCode());
+          InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(existingIdentifier.get());
+          return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), identifierTypeDto, HttpStatusResponse.OK.getCode());
       }catch (Exception e){
           return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(), e.getMessage(), HttpStatusResponse.INTERNAL_ERROR.getCode());
       }
