@@ -7,5 +7,5 @@ import java.util.UUID;
 @Data
 public class CreateBankAccountDto {
     private UUID userId;
-    private UUID bankAccountTypeId;
+    private String bankAccountTypeCode;
 }
