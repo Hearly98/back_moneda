@@ -1,6 +1,7 @@
-package com.moneda.back.utils;
+package com.moneda.bankAccount_microservice.common.utils;
 import java.util.Random;
 import java.util.stream.Collectors;
+
 public class BankAccountGenerator {
     // Generador de número de cuenta único (10 dígitos)
     public static String generateAccountNumber() {
@@ -8,7 +9,7 @@ public class BankAccountGenerator {
     }
 
     // Generador de CVU basado en el número de cuenta y otros identificadores
-    public static String generateCvu(String accountNumber, String bankCode, String branchCode) {
+    public static String generateCbu(String accountNumber, String bankCode, String branchCode) {
         String firstBlock = bankCode + branchCode;
         int firstVerifier = calculateModulo10(firstBlock);
         int secondVerifier = calculateModulo10(accountNumber);
