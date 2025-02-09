@@ -8,4 +8,5 @@ import java.util.UUID;
 public class CreateBankAccountDto {
     private UUID userId;
     private String bankAccountTypeCode;
+    private String interbankOperatorCode;
 }

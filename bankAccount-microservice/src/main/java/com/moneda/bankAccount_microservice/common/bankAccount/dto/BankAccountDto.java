@@ -1,6 +1,7 @@
 package com.moneda.bankAccount_microservice.common.bankAccount.dto;
 
 import com.moneda.bankAccount_microservice.common.bankAccountType.dto.BankAccountTypeDto;
+import com.moneda.bankAccount_microservice.common.interbankIdentifierType.dto.InterbankIdentifierTypeDto;
 import com.moneda.bankAccount_microservice.common.interbankIdentifierType.entities.InterbankIdentifierType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,11 +14,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BankAccountDto {
-    private String accountNumber;
-    private InterbankIdentifierType interbankIdentifierType;
-    private String interbankNumber;
-    private BigDecimal balance;
-    private String alias;
+    private UUID interbankIdentifierId;
+    private UUID bankAccountTypeId;
     private UUID userId;
+    private String accountNumber;
+    private String interbankNumber;
+    private String alias;
+    private BigDecimal balance;
+    private InterbankIdentifierTypeDto interbankIdentifierType;
     private BankAccountTypeDto bankAccountType;
 }
