@@ -74,7 +74,7 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
             identifierType.setLastModified(new Date());
             interbankIdentifierTypeRepository.save(identifierType);
             InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
-            return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), identifierTypeDto, HttpStatusResponse.OK.getCode());
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.UPDATED.getKey(), identifierTypeDto, HttpStatusResponse.UPDATED.getCode());
         }catch (Exception e) {
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(), e.getMessage(), HttpStatusResponse.INTERNAL_ERROR.getCode());
         }
@@ -108,7 +108,7 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
             identifierType.setIsActive(false);
             interbankIdentifierTypeRepository.save(identifierType);
             InterbankIdentifierTypeDto identifierTypeDto = interbankIdentifierTypeMapper.toInterbankIdentifierTypeDto(identifierType);
-            return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), identifierTypeDto, HttpStatusResponse.OK.getCode());
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.DELETED.getKey(), identifierTypeDto, HttpStatusResponse.DELETED.getCode());
         }
         catch (Exception e){
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(), e.getMessage(), HttpStatusResponse.INTERNAL_ERROR.getCode());
