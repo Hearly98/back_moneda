@@ -60,6 +60,9 @@ public class BankAccountServiceImpl implements BankAccountService {
         try {
             BankAccountType bankAccountType = bankAccountTypeRepository.findByCode(createBankAccount
                     .getBankAccountTypeCode()).orElseThrow(()-> new RuntimeException("Tipo Cuenta Banco no encontrado"));
+            InterbankIdentifierType interbankIdentifierType = interbankIdentifierTypeRepository
+                    .findByCode(createBankAccount.getInterbankOperatorCode())
+                    .orElseThrow(()-> new RuntimeException("Operador Interbancario no encontrado"));
             String accountNumber = BankAccountGenerator.generateAccountNumber();
             String interbankNumber = BankAccountGenerator.generateCbu(accountNumber, "123", "4567");
             String alias = BankAccountGenerator.generateAlias();
@@ -69,6 +72,7 @@ public class BankAccountServiceImpl implements BankAccountService {
                return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(),
                        Collections.emptyList(), HttpStatusResponse.BAD_REQUEST.getCode());
             }
+            bankAccount.setInterbankIdentifierType(interbankIdentifierType);
             bankAccount.setInterbankNumber(interbankNumber);
             bankAccount.setBalance(BigDecimal.ZERO);
             bankAccount.setAlias(alias);
@@ -85,8 +89,8 @@ public class BankAccountServiceImpl implements BankAccountService {
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.CREATED.getKey(), bankAccountDto,
                     HttpStatusResponse.CREATED.getCode());
         } catch (Exception e) {
-            return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(), null,
-                    HttpStatusResponse.BAD_REQUEST.getCode());
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(),
+                    Collections.singletonList(e.getMessage()), HttpStatusResponse.BAD_REQUEST.getCode());
         }
     }
 
