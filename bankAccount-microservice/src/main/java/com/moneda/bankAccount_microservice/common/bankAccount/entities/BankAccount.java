@@ -29,7 +29,7 @@ public class BankAccount extends AuditAware {
     private String alias;
     @ManyToOne
     @JoinColumn(name = "id_identificador_interbancario", nullable = false)
-    private InterbankIdentifierType interbankIdentifierId;
+    private InterbankIdentifierType interbankIdentifierType;
     @ManyToOne
     @JoinColumn(name = "id_tipo_cuenta_banco", nullable = false)
     private BankAccountType bankAccountType;

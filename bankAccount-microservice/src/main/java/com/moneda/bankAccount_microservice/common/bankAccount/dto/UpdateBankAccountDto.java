@@ -9,9 +9,10 @@ import java.util.UUID;
 @Data
 public class UpdateBankAccountDto {
     private String accountNumber;
-    private String interbankOperatorNumber;
+    private String interbankOperatorCode;
+    private String interbankNumber;
     private BigDecimal balance;
     private String alias;
     private UUID userId;
-    private BankAccountTypeDto bankAccountType;
+    private String bankAccountTypeCode;
 }

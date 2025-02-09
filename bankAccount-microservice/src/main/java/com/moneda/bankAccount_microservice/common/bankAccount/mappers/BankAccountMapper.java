@@ -13,7 +13,7 @@ public class BankAccountMapper {
         BankAccountDto dto = new BankAccountDto();
         dto.setAccountNumber(bankAccount.getAccountNumber());
         dto.setUserId(bankAccount.getUserId());
-        dto.setInterbankOperatorNumber(bankAccount.getInterbankNumber());
+        dto.setInterbankIdentifierType(bankAccount.getInterbankIdentifierType());
         dto.setBankAccountType(bankAccountTypeMapper.toBankAccountTypeDto(bankAccount.getBankAccountType()));
         dto.setBalance(bankAccount.getBalance());
         dto.setAlias(bankAccount.getAlias());
