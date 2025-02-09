@@ -58,8 +58,8 @@ public class BankAccountServiceImpl implements BankAccountService {
                     HttpStatusResponse.BAD_REQUEST.getCode());
         }
         try {
-            BankAccountType bankAccountType = bankAccountTypeRepository.findById(createBankAccount
-                    .getBankAccountTypeId()).orElseThrow(()-> new RuntimeException("Tipo Cuenta Banco no encontrado"));
+            BankAccountType bankAccountType = bankAccountTypeRepository.findByCode(createBankAccount
+                    .getBankAccountTypeCode()).orElseThrow(()-> new RuntimeException("Tipo Cuenta Banco no encontrado"));
             String accountNumber = BankAccountGenerator.generateAccountNumber();
             String interbankNumber = BankAccountGenerator.generateCbu(accountNumber, "123", "4567");
             String alias = BankAccountGenerator.generateAlias();
