@@ -21,7 +21,7 @@ public class BankAccount extends AuditAware {
     private BigDecimal balance;
     @Column(name = "id_usuario", nullable = false)
     private UUID userId;
-    @Column(name = "cuenta_banco", nullable = false, length = 10)
+    @Column(name = "cuenta_banco", nullable = false, length = 20)
     private String accountNumber;
     @Column(name= "numero_interbancario", nullable = false)
     private String interbankNumber;

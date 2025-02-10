@@ -1,7 +1,9 @@
 package com.moneda.bankAccount_microservice.common.bankAccount.service.impl;
 
+import com.moneda.bankAccount_microservice.common.bankAccount.context.BankAccountContext;
 import com.moneda.bankAccount_microservice.common.bankAccount.dto.BankAccountDto;
 import com.moneda.bankAccount_microservice.common.bankAccount.dto.CreateBankAccountDto;
+import com.moneda.bankAccount_microservice.common.bankAccount.dto.GeneratedBankAccountDto;
 import com.moneda.bankAccount_microservice.common.bankAccount.dto.UpdateBankAccountDto;
 import com.moneda.bankAccount_microservice.common.bankAccount.entities.BankAccount;
 import com.moneda.bankAccount_microservice.common.bankAccount.mappers.BankAccountMapper;
@@ -11,11 +13,10 @@ import com.moneda.bankAccount_microservice.common.bankAccountType.entities.BankA
 import com.moneda.bankAccount_microservice.common.bankAccountType.repositories.BankAccountTypeRepository;
 import com.moneda.bankAccount_microservice.common.interbankIdentifierType.entities.InterbankIdentifierType;
 import com.moneda.bankAccount_microservice.common.interbankIdentifierType.repositories.InterbankIdentifierTypeRepository;
-import com.moneda.bankAccount_microservice.common.utils.BankAccountGenerator;
+import com.moneda.bankAccount_microservice.common.bankAccount.utils.BankAccountGenerator;
 import com.moneda.utils.HttpStatusResponse;
 import com.moneda.utils.ResponseEntityCustom;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,13 +24,13 @@ import org.springframework.validation.BindingResult;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class BankAccountServiceImpl implements BankAccountService {
 
     private final BankAccountRepository bankAccountRepository;
+    private final BankAccountContext bankAccountContext;
     private final BankAccountTypeRepository bankAccountTypeRepository;
     private final BankAccountMapper bankAccountMapper;
     private final InterbankIdentifierTypeRepository interbankIdentifierTypeRepository;
@@ -60,20 +61,18 @@ public class BankAccountServiceImpl implements BankAccountService {
         try {
             BankAccountType bankAccountType = bankAccountTypeRepository.findByCode(createBankAccount
                     .getBankAccountTypeCode()).orElseThrow(()-> new RuntimeException("Tipo Cuenta Banco no encontrado"));
-            InterbankIdentifierType interbankIdentifierType = interbankIdentifierTypeRepository
-                    .findByCode(createBankAccount.getInterbankOperatorCode())
-                    .orElseThrow(()-> new RuntimeException("Operador Interbancario no encontrado"));
-            String accountNumber = BankAccountGenerator.generateAccountNumber();
-            String interbankNumber = BankAccountGenerator.generateCbu(accountNumber, "123", "4567");
+            GeneratedBankAccountDto generateBankAccount = bankAccountContext.generateBankAccount(createBankAccount.getCountryCode());
             String alias = BankAccountGenerator.generateAlias();
             BankAccount bankAccount = new BankAccount();
-            bankAccount.setAccountNumber(accountNumber);
-            if (bankAccountRepository.existsByAccountNumber(accountNumber)) {
+            bankAccount.setAccountNumber(generateBankAccount.getAccountNumber());
+            if (bankAccountRepository.existsByAccountNumber(generateBankAccount.getAccountNumber())) {
                return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(),
                        Collections.emptyList(), HttpStatusResponse.BAD_REQUEST.getCode());
             }
+            InterbankIdentifierType interbankIdentifierType = interbankIdentifierTypeRepository.findByCode(generateBankAccount.getInterbankIdentifierType())
+                    .orElseThrow(() -> new RuntimeException("Interbank Identifier Type no ha sido encontrado"));
             bankAccount.setInterbankIdentifierType(interbankIdentifierType);
-            bankAccount.setInterbankNumber(interbankNumber);
+            bankAccount.setInterbankNumber(generateBankAccount.getInterbankNumber());
             bankAccount.setBalance(BigDecimal.ZERO);
             bankAccount.setAlias(alias);
             if (bankAccountRepository.existsByAlias(alias)) {
