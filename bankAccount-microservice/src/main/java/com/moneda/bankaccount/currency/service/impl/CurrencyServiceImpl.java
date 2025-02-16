@@ -1,12 +1,12 @@
-package com.moneda.bankaccount.common.currency.impl;
+package com.moneda.bankaccount.currency.service.impl;
 
-import com.moneda.bankaccount.common.currency.dto.CreateCurrencyDto;
-import com.moneda.bankaccount.common.currency.dto.CurrencyDto;
-import com.moneda.bankaccount.common.currency.dto.UpdateCurrencyDto;
-import com.moneda.bankaccount.common.currency.mappers.CurrencyMapper;
-import com.moneda.bankaccount.common.currency.repositories.CurrencyRepository;
-import com.moneda.bankaccount.common.currency.service.CurrencyService;
-import com.moneda.bankaccount.common.currency.entities.Currency;
+import com.moneda.bankaccount.currency.dto.CreateCurrencyDto;
+import com.moneda.bankaccount.currency.dto.CurrencyDto;
+import com.moneda.bankaccount.currency.dto.UpdateCurrencyDto;
+import com.moneda.bankaccount.currency.mappers.CurrencyMapper;
+import com.moneda.bankaccount.currency.repositories.CurrencyRepository;
+import com.moneda.bankaccount.currency.service.CurrencyService;
+import com.moneda.bankaccount.currency.entities.Currency;
 import com.moneda.utils.HttpStatusResponse;
 import com.moneda.utils.ResponseEntityCustom;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     private final CurrencyMapper currencyMapper;
     @Override
     public ResponseEntity<Map<String, Object>> getCurrencies() {
-        List<CurrencyDto> currencies = currencyRepository.findAll()
+        List<CurrencyDto> currencies = currencyRepository.findByIsActiveTrue()
                 .stream()
                 .map(currencyMapper::toCurrencyDto)
                 .toList();
@@ -102,8 +102,9 @@ public class CurrencyServiceImpl implements CurrencyService {
                 return ResponseEntityCustom.builderResponse(HttpStatusResponse.NOT_FOUND.getKey(),
                         Collections.emptyList(), HttpStatusResponse.NOT_FOUND.getCode());
             }
+            CurrencyDto currencyDto = currencyMapper.toCurrencyDto(currencyOptional.get());
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(),
-                    currencyOptional.get(), HttpStatusResponse.OK.getCode());
+                    currencyDto, HttpStatusResponse.OK.getCode());
 
         } catch (Exception e) {
             return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(),
