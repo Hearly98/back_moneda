@@ -1,8 +1,8 @@
-package com.moneda.bankaccount.common.bankAccount.context;
+package com.moneda.bankaccount.bankaccount.context;
 
-import com.moneda.bankaccount.common.bankAccount.dto.GeneratedBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.strategy.BankAccountGenerationStrategy;
-import com.moneda.bankaccount.common.bankAccount.utils.NationalityCode;
+import com.moneda.bankaccount.bankaccount.dto.GeneratedBankAccountDto;
+import com.moneda.bankaccount.bankaccount.strategy.BankAccountGenerationStrategy;
+import com.moneda.bankaccount.bankaccount.utils.NationalityCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

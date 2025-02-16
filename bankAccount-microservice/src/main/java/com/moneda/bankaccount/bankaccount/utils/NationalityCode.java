@@ -1,11 +1,11 @@
-package com.moneda.bankaccount.common.bankAccount.utils;
+package com.moneda.bankaccount.bankaccount.utils;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 public enum NationalityCode {
-    ARGENTINA("AR", "CBU"),
-    PERU("PE", "CCI");
+    ARGENTINA("AR", "cbuComponent"),
+    PERU("PE", "cciComponent");
 
     private final String code;
     private final String strategyBeanName;

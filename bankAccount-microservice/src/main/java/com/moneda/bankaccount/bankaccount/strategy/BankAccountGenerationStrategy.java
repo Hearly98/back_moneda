@@ -1,4 +1,4 @@
-package com.moneda.bankaccount.common.bankAccount.strategy;
+package com.moneda.bankaccount.bankaccount.strategy;
 
 public interface BankAccountGenerationStrategy {
     String generateBankAccount();

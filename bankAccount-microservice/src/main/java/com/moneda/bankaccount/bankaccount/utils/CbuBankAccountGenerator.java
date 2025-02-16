@@ -1,16 +1,20 @@
-package com.moneda.bankaccount.common.bankAccount.utils;
+package com.moneda.bankaccount.bankaccount.utils;
 
-import com.moneda.bankaccount.common.bankAccount.strategy.BankAccountGenerationStrategy;
+import com.moneda.bankaccount.bankaccount.strategy.BankAccountGenerationStrategy;
 import org.springframework.stereotype.Component;
+import java.util.concurrent.ThreadLocalRandom;
 
-@Component("CBU")
+@Component("cbuComponent")
 public class CbuBankAccountGenerator implements BankAccountGenerationStrategy {
 
     private static final String BANK_CODE = "017";
     private static final String BRANCH_CODE = "1234";
 
     @Override
-    public String generateInterbankIdentifier(String accountNumber){
+    public String generateInterbankIdentifier(String accountNumber) {
+        if (accountNumber == null || accountNumber.length() != 10) {
+            accountNumber = generateBankAccount();
+        }
         String firstBlock = BANK_CODE + BRANCH_CODE;
         int firstVerifier = calculateModulo10(firstBlock);
         int secondVerifier = calculateModulo10(accountNumber);
@@ -18,7 +22,8 @@ public class CbuBankAccountGenerator implements BankAccountGenerationStrategy {
     }
 
     public String generateBankAccount() {
-        return String.format("%010d", (long) (Math.random() * 1_000_000_0000L));
+        long number = ThreadLocalRandom.current().nextLong(100_000_0000L, 1_000_000_0000L);
+        return String.valueOf(number);
     }
 
     private static int calculateModulo10(String input) {
@@ -29,6 +34,7 @@ public class CbuBankAccountGenerator implements BankAccountGenerationStrategy {
         }
         return (10 - (sum % 10)) % 10;
     }
+
     @Override
     public String getInterbankIdentifierType() {
         return "02";

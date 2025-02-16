@@ -1,4 +1,4 @@
-package com.moneda.bankaccount.common.bankAccount.utils;
+package com.moneda.bankaccount.bankaccount.utils;
 import java.util.Random;
 import java.util.stream.Collectors;
 
