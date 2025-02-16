@@ -1,9 +1,9 @@
-package com.moneda.bankaccount.common.currency.controllers;
+package com.moneda.bankaccount.currency.controllers;
 
-import com.moneda.bankaccount.common.currency.dto.CreateCurrencyDto;
-import com.moneda.bankaccount.common.currency.dto.CurrencyDto;
-import com.moneda.bankaccount.common.currency.dto.UpdateCurrencyDto;
-import com.moneda.bankaccount.common.currency.service.CurrencyService;
+import com.moneda.bankaccount.currency.dto.CreateCurrencyDto;
+import com.moneda.bankaccount.currency.dto.CurrencyDto;
+import com.moneda.bankaccount.currency.dto.UpdateCurrencyDto;
+import com.moneda.bankaccount.currency.service.CurrencyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

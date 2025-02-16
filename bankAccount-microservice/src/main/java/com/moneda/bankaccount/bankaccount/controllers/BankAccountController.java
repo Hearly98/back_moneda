@@ -1,9 +1,9 @@
-package com.moneda.bankaccount.common.bankAccount.controllers;
+package com.moneda.bankaccount.bankaccount.controllers;
 
-import com.moneda.bankaccount.common.bankAccount.dto.CreateBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.dto.UpdateBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.service.BankAccountService;
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.InterbankIdentifierTypeDto;
+import com.moneda.bankaccount.bankaccount.dto.CreateBankAccountDto;
+import com.moneda.bankaccount.bankaccount.dto.UpdateBankAccountDto;
+import com.moneda.bankaccount.bankaccount.service.BankAccountService;
+import com.moneda.bankaccount.interbankidentifiertype.dto.InterbankIdentifierTypeDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
