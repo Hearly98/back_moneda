@@ -1,6 +1,6 @@
-package com.moneda.bankaccount.common.bankAccount.repositories;
+package com.moneda.bankaccount.bankaccount.repositories;
 
-import com.moneda.bankaccount.common.bankAccount.entities.BankAccount;
+import com.moneda.bankaccount.bankaccount.entities.BankAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
