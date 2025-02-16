@@ -1,19 +1,19 @@
-package com.moneda.bankaccount.common.bankAccount.service.impl;
+package com.moneda.bankaccount.bankaccount.service.impl;
 
-import com.moneda.bankaccount.common.bankAccount.context.BankAccountContext;
-import com.moneda.bankaccount.common.bankAccount.dto.BankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.dto.CreateBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.dto.GeneratedBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.dto.UpdateBankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.entities.BankAccount;
-import com.moneda.bankaccount.common.bankAccount.mappers.BankAccountMapper;
-import com.moneda.bankaccount.common.bankAccount.repositories.BankAccountRepository;
-import com.moneda.bankaccount.common.bankAccount.service.BankAccountService;
-import com.moneda.bankaccount.common.bankAccountType.entities.BankAccountType;
-import com.moneda.bankaccount.common.bankAccountType.repositories.BankAccountTypeRepository;
-import com.moneda.bankaccount.common.interbankIdentifierType.entities.InterbankIdentifierType;
-import com.moneda.bankaccount.common.interbankIdentifierType.repositories.InterbankIdentifierTypeRepository;
-import com.moneda.bankaccount.common.bankAccount.utils.BankAccountGenerator;
+import com.moneda.bankaccount.bankaccount.context.BankAccountContext;
+import com.moneda.bankaccount.bankaccount.dto.BankAccountDto;
+import com.moneda.bankaccount.bankaccount.dto.CreateBankAccountDto;
+import com.moneda.bankaccount.bankaccount.dto.GeneratedBankAccountDto;
+import com.moneda.bankaccount.bankaccount.dto.UpdateBankAccountDto;
+import com.moneda.bankaccount.bankaccount.entities.BankAccount;
+import com.moneda.bankaccount.bankaccount.mappers.BankAccountMapper;
+import com.moneda.bankaccount.bankaccount.repositories.BankAccountRepository;
+import com.moneda.bankaccount.bankaccount.service.BankAccountService;
+import com.moneda.bankaccount.bankaccounttype.entities.BankAccountType;
+import com.moneda.bankaccount.bankaccounttype.repositories.BankAccountTypeRepository;
+import com.moneda.bankaccount.interbankidentifiertype.entities.InterbankIdentifierType;
+import com.moneda.bankaccount.interbankidentifiertype.repositories.InterbankIdentifierTypeRepository;
+import com.moneda.bankaccount.bankaccount.utils.BankAccountGenerator;
 import com.moneda.utils.HttpStatusResponse;
 import com.moneda.utils.ResponseEntityCustom;
 import lombok.AllArgsConstructor;
@@ -115,7 +115,7 @@ public class BankAccountServiceImpl implements BankAccountService {
                     findByCode(updateBankAccount.getBankAccountTypeCode())
                     .orElseThrow(()-> new RuntimeException("Tipo Cuenta Banco no encontrado"));
             InterbankIdentifierType interbankIdentifierType = interbankIdentifierTypeRepository
-                    .findByCode(updateBankAccount.getBankAccountTypeCode())
+                    .findByCode(updateBankAccount.getInterbankOperatorCode())
                     .orElseThrow(()-> new RuntimeException("Operador interbancario no encontrado"));
             BankAccount bankAccount = existingBankAccount.get();
             bankAccount.setAccountNumber(updateBankAccount.getAccountNumber());

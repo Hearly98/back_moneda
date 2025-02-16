@@ -1,11 +1,11 @@
-package com.moneda.bankaccount.common.interbankIdentifierType.service.impl;
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.CreateInterbankIdentifierTypeDto;
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.InterbankIdentifierTypeDto;
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.UpdateInterbankIdentifierTypeDto;
-import com.moneda.bankaccount.common.interbankIdentifierType.entities.InterbankIdentifierType;
-import com.moneda.bankaccount.common.interbankIdentifierType.mappers.InterbankIdentifierTypeMapper;
-import com.moneda.bankaccount.common.interbankIdentifierType.repositories.InterbankIdentifierTypeRepository;
-import com.moneda.bankaccount.common.interbankIdentifierType.service.InterbankIdentifierTypeService;
+package com.moneda.bankaccount.interbankidentifiertype.service.impl;
+import com.moneda.bankaccount.interbankidentifiertype.dto.CreateInterbankIdentifierTypeDto;
+import com.moneda.bankaccount.interbankidentifiertype.dto.InterbankIdentifierTypeDto;
+import com.moneda.bankaccount.interbankidentifiertype.dto.UpdateInterbankIdentifierTypeDto;
+import com.moneda.bankaccount.interbankidentifiertype.entities.InterbankIdentifierType;
+import com.moneda.bankaccount.interbankidentifiertype.mappers.InterbankIdentifierTypeMapper;
+import com.moneda.bankaccount.interbankidentifiertype.repositories.InterbankIdentifierTypeRepository;
+import com.moneda.bankaccount.interbankidentifiertype.service.InterbankIdentifierTypeService;
 import com.moneda.utils.HttpStatusResponse;
 import com.moneda.utils.ResponseEntityCustom;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class InterbankIdentifierTypeServiceImpl implements InterbankIdentifierTy
 
     @Override
     public ResponseEntity<Map<String, Object>> getAllInterbankIdentifierTypes() {
-        List<InterbankIdentifierTypeDto> identifiers = interbankIdentifierTypeRepository.findAll()
+        List<InterbankIdentifierTypeDto> identifiers = interbankIdentifierTypeRepository.findByIsActiveTrue()
                 .stream()
                 .map(interbankIdentifierTypeMapper::toInterbankIdentifierTypeDto)
                 .toList();
