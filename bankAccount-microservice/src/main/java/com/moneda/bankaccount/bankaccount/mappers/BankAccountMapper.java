@@ -1,8 +1,8 @@
-package com.moneda.bankaccount.common.bankAccount.mappers;
-import com.moneda.bankaccount.common.bankAccount.dto.BankAccountDto;
-import com.moneda.bankaccount.common.bankAccount.entities.BankAccount;
-import com.moneda.bankaccount.common.bankAccountType.mappers.BankAccountTypeMapper;
-import com.moneda.bankaccount.common.interbankIdentifierType.mappers.InterbankIdentifierTypeMapper;
+package com.moneda.bankaccount.bankaccount.mappers;
+import com.moneda.bankaccount.bankaccount.dto.BankAccountDto;
+import com.moneda.bankaccount.bankaccount.entities.BankAccount;
+import com.moneda.bankaccount.bankaccounttype.mappers.BankAccountTypeMapper;
+import com.moneda.bankaccount.interbankidentifiertype.mappers.InterbankIdentifierTypeMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +13,7 @@ public class BankAccountMapper {
     private final InterbankIdentifierTypeMapper identifierTypeMapper;
     public BankAccountDto toBankAccountDto(BankAccount bankAccount) {
         BankAccountDto dto = new BankAccountDto();
+        dto.setId(bankAccount.getId());
         dto.setAccountNumber(bankAccount.getAccountNumber());
         dto.setUserId(bankAccount.getUserId());
         dto.setInterbankIdentifierId(bankAccount.getInterbankIdentifierType().getId());

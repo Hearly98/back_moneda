@@ -1,7 +1,7 @@
-package com.moneda.bankaccount.common.currency.mappers;
+package com.moneda.bankaccount.currency.mappers;
 
-import com.moneda.bankaccount.common.currency.dto.CurrencyDto;
-import com.moneda.bankaccount.common.currency.entities.Currency;
+import com.moneda.bankaccount.currency.dto.CurrencyDto;
+import com.moneda.bankaccount.currency.entities.Currency;
 import org.springframework.stereotype.Component;
 
 @Component

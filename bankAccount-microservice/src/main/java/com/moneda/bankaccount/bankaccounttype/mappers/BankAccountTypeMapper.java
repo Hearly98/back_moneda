@@ -1,8 +1,8 @@
-package com.moneda.bankaccount.common.bankAccountType.mappers;
+package com.moneda.bankaccount.bankaccounttype.mappers;
 
-import com.moneda.bankaccount.common.bankAccountType.dto.BankAccountTypeDto;
-import com.moneda.bankaccount.common.bankAccountType.entities.BankAccountType;
-import com.moneda.bankaccount.common.currency.mappers.CurrencyMapper;
+import com.moneda.bankaccount.bankaccounttype.dto.BankAccountTypeDto;
+import com.moneda.bankaccount.bankaccounttype.entities.BankAccountType;
+import com.moneda.bankaccount.currency.mappers.CurrencyMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

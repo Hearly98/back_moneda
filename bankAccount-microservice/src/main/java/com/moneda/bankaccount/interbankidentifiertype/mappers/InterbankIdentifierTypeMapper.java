@@ -1,7 +1,7 @@
-package com.moneda.bankaccount.common.interbankIdentifierType.mappers;
+package com.moneda.bankaccount.interbankidentifiertype.mappers;
 
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.InterbankIdentifierTypeDto;
-import com.moneda.bankaccount.common.interbankIdentifierType.entities.InterbankIdentifierType;
+import com.moneda.bankaccount.interbankidentifiertype.dto.InterbankIdentifierTypeDto;
+import com.moneda.bankaccount.interbankidentifiertype.entities.InterbankIdentifierType;
 import org.springframework.stereotype.Component;
 
 @Component
