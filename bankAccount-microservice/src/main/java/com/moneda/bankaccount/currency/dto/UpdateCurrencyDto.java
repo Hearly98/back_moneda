@@ -1,4 +1,4 @@
-package com.moneda.bankaccount.common.currency.dto;
+package com.moneda.bankaccount.currency.dto;
 
 import lombok.Data;
 

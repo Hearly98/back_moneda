@@ -1,6 +1,6 @@
-package com.moneda.bankaccount.common.bankAccountType.dto;
+package com.moneda.bankaccount.bankaccounttype.dto;
 
-import com.moneda.bankaccount.common.currency.dto.CurrencyDto;
+import com.moneda.bankaccount.currency.dto.CurrencyDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

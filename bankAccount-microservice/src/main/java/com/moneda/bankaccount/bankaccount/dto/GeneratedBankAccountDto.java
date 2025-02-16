@@ -1,4 +1,4 @@
-package com.moneda.bankaccount.common.bankAccount.dto;
+package com.moneda.bankaccount.bankaccount.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

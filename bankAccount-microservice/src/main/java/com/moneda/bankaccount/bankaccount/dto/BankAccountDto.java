@@ -1,7 +1,7 @@
-package com.moneda.bankaccount.common.bankAccount.dto;
+package com.moneda.bankaccount.bankaccount.dto;
 
-import com.moneda.bankaccount.common.bankAccountType.dto.BankAccountTypeDto;
-import com.moneda.bankaccount.common.interbankIdentifierType.dto.InterbankIdentifierTypeDto;
+import com.moneda.bankaccount.bankaccounttype.dto.BankAccountTypeDto;
+import com.moneda.bankaccount.interbankidentifiertype.dto.InterbankIdentifierTypeDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BankAccountDto {
+    private UUID id;
     private UUID interbankIdentifierId;
     private UUID bankAccountTypeId;
     private UUID userId;
