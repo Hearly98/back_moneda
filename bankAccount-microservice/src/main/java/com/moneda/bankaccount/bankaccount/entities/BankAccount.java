@@ -1,14 +1,16 @@
-package com.moneda.bankaccount.common.bankAccount.entities;
+package com.moneda.bankaccount.bankaccount.entities;
 
-import com.moneda.bankaccount.common.bankAccountType.entities.BankAccountType;
-import com.moneda.bankaccount.common.interbankIdentifierType.entities.InterbankIdentifierType;
-import com.moneda.bankaccount.common.models.AuditAware;
+import com.moneda.bankaccount.bankaccounttype.entities.BankAccountType;
+import com.moneda.bankaccount.interbankidentifiertype.entities.InterbankIdentifierType;
+import com.moneda.bankaccount.models.AuditAware;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "cuenta_banco")
 @Data
 @Entity

@@ -1,11 +1,12 @@
-package com.moneda.bankaccount.common.currency.entities;
+package com.moneda.bankaccount.currency.entities;
 
-import com.moneda.bankaccount.common.models.AuditAware;
+import com.moneda.bankaccount.models.AuditAware;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.UUID;
-
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "moneda")
 @Data
 @Entity
