@@ -1,4 +1,4 @@
-package com.moneda.bankAccount_microservice;
+package com.moneda.bankaccount;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
