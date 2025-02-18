@@ -10,4 +10,9 @@ public class UserMicroserviceApplication {
 		SpringApplication.run(UserMicroserviceApplication.class, args);
 	}
 
+
+
+
+
+
 }
