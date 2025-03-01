@@ -11,10 +11,10 @@ import java.util.UUID;
 
 public interface DocumentTypeService {
 
-    public ResponseEntity<Map<String, Object>> listDocumentType();
-    public ResponseEntity<Map<String, Object>> saveDocumentType(CreateDocumentTypeDto createDocumentTypeDto, BindingResult bindingResult);
-    public ResponseEntity<Map<String, Object>> updateDocumentType(UUID id, UpdateDocumentTypeDto updateDocumentTypeDto, BindingResult bindingResult);
-    public ResponseEntity<Map<String, Object>> getDocumentTypeById(UUID id);
-    public ResponseEntity<Map<String, Object>> deleteDocumentType(UUID id);
+    ResponseEntity<Map<String, Object>> listDocumentType();
+    ResponseEntity<Map<String, Object>> saveDocumentType(CreateDocumentTypeDto createDocumentTypeDto, BindingResult bindingResult);
+    ResponseEntity<Map<String, Object>> updateDocumentType(UUID id, UpdateDocumentTypeDto updateDocumentTypeDto, BindingResult bindingResult);
+    ResponseEntity<Map<String, Object>> getDocumentTypeById(UUID id);
+    ResponseEntity<Map<String, Object>> deleteDocumentType(UUID id);
 
 }

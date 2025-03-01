@@ -1,4 +1,4 @@
-package com.moneda.user_microservice.models.dto;
+package com.moneda.user_microservice.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,15 +16,4 @@ public class AuditAware {
     private Date lastModified;
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
-        this.isActive = true;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.lastModified = new Date();
-    }
 }
