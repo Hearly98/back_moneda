@@ -11,15 +11,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-
+    private UUID id;
     private String firstName;
     private String lastName;
-    private String address;
     private String numDocument;
     private Date birthDate;
     private String phone;
     private String email;
-    private String password;
     private String countryCode;
     private UUID documentTypeId;
 

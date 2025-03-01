@@ -16,14 +16,13 @@ public class UserMapper {
 
 public UserDto toUserDto(User user){
 UserDto dto= new UserDto();
+dto.setId(user.getId());
 dto.setFirstName(user.getFirstName());
 dto.setLastName(user.getLastName());
-dto.setAddress(user.getAddress());
 dto.setNumDocument(user.getNumDocument());
 dto.setBirthDate(user.getBirthDate());
 dto.setPhone(user.getPhone());
 dto.setEmail(user.getEmail());
-dto.setPassword(user.getPassword());
 dto.setCountryCode(user.getCountryCode());
 dto.setDocumentTypeId(user.getDocumentType().getId());
     return dto;
