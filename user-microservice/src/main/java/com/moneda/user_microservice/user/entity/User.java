@@ -1,14 +1,16 @@
 package com.moneda.user_microservice.user.entity;
 
 import com.moneda.user_microservice.documenttype.entity.DocumentType;
-import com.moneda.user_microservice.models.dto.AuditAware;
+import com.moneda.user_microservice.models.AuditAware;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
 import java.util.Date;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name = "usuarios")
