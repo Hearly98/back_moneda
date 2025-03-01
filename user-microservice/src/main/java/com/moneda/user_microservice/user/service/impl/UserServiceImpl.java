@@ -13,23 +13,18 @@ import com.moneda.utils.HttpStatusResponse;
 import com.moneda.utils.ResponseEntityCustom;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-
 import java.util.*;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-
     private final UserRepository userRepository;
     private  final DocumentTypeRepository documentTypeRepository;
     private final UserMapper userMapper;
-
-
 
     @Override
     public ResponseEntity<Map<String, Object>> listUsers() {
@@ -47,22 +42,16 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public ResponseEntity<Map<String, Object>> saveUser(CreateUserDto createUserDto, BindingResult bindingResult) {
-
-          Map<String,Object> response = new HashMap<>();
-
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
                     .toList();
-            response.put("message", "Error en la validación");
-            response.put("errors", errors);
-            return ResponseEntity.badRequest().body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(), errors,
+                    HttpStatusResponse.BAD_REQUEST.getCode());
         }
-
 
         try{
            User user= new User();
-
            DocumentType documentType= documentTypeRepository.findById(createUserDto.getDocumentTypeId())
                    .orElseThrow(()-> new RuntimeException("Tipo de Documento no encontrado"));
             user.setFirstName(createUserDto.getFirstName());
@@ -75,123 +64,87 @@ public class UserServiceImpl implements UserService {
             user.setPassword(createUserDto.getPassword());
             user.setCountryCode(createUserDto.getCountryCode());
             user.setDocumentType(documentType);
-
-
+            user.setIsActive(true);
+            user.setCreatedAt(new Date());
             userRepository.save(user);
-
             UserDto userDto = userMapper.toUserDto(user);
-            response.put("message", "Usuario creado exitosamente");
-            response.put("user", userDto);
-            return ResponseEntity.ok(response);
-
-
-
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.CREATED.getKey(),
+                    userDto, HttpStatusResponse.CREATED.getCode());
         }catch (Exception e ){
-
-            response.put("message", "Error al registrar el usuario ");
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(),
+                    Collections.singletonList(e.getMessage()), HttpStatusResponse.INTERNAL_ERROR.getCode());
         }
-
-
     }
 
     @Override
-    public ResponseEntity<Map<String, Object>> updateUser(UUID id, UpdateUserDto updateUserDto, BindingResult bindingResult) {
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<Map<String, Object>> updateUser(UUID id, UpdateUserDto updateUserDto,
+                                                          BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
             List<String> errors = bindingResult.getFieldErrors().stream()
                     .map(err->"El campo '" + err.getField() + "' " + err.getDefaultMessage())
                     .toList();
-            response.put("message", "Error en la validación");
-            response.put("errors", errors);
-            return ResponseEntity.badRequest().body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.BAD_REQUEST.getKey(), errors,
+                    HttpStatusResponse.BAD_REQUEST.getCode());
         }
 
         Optional<User> existingUser = userRepository.findById(id);
         if (existingUser.isEmpty()) {
-            response.put("message", "Usuario con ID '" + id + "' no existe");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.NOT_FOUND.getKey(), Collections.emptyList(),
+                    HttpStatusResponse.NOT_FOUND.getCode());
         }
         try{
-
             User user = existingUser.get();
             user.setFirstName(updateUserDto.getFirstName());
             user.setLastName(updateUserDto.getLastName());
             user.setAddress(updateUserDto.getAddress());
             user.setBirthDate(updateUserDto.getBirthDate());
             user.setPhone(updateUserDto.getPhone());
-
-
-
             userRepository.save(user);
-
-
             UserDto userDto = userMapper.toUserDto(user);
-            response.put("message", "El usuario se ha actualizado correctamente");
-            response.put("User", userDto);
-            return ResponseEntity.ok(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.UPDATED.getKey(), userDto,
+                    HttpStatusResponse.UPDATED.getCode());
         } catch (Exception e) {
-            response.put("message", "Error al actualizar el Usuario");
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(),
+                    Collections.singletonList(e.getMessage()), HttpStatusResponse.INTERNAL_ERROR.getCode());
         }
 
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> getUserById(UUID id) {
-
-
-        Map<String, Object> response = new HashMap<>();
         try {
-            Optional<User> UserOptional = userRepository.findById(id);
-            if (UserOptional.isEmpty()) {
-                response.put("message", "El usuario no existe");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+            Optional<User> userOptional = userRepository.findById(id);
+            if (userOptional.isEmpty()) {
+                return ResponseEntityCustom.builderResponse(HttpStatusResponse.NOT_FOUND.getKey(),
+                        Collections.emptyList(), HttpStatusResponse.NOT_FOUND.getCode());
             }
-
-            response.put("message", "Usuario no encontrado");
-            response.put("User", UserOptional.get());
-            return ResponseEntity.ok(response);
-
+            UserDto userDto = userMapper.toUserDto(userOptional.get());
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.OK.getKey(), userDto,
+                    HttpStatusResponse.OK.getCode());
         } catch (Exception e) {
-            response.put("message", "Error al buscar al Usuario");
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(),
+                    Collections.singletonList(e.getMessage()), HttpStatusResponse.INTERNAL_ERROR.getCode());
         }
     }
 
     @Override
     public ResponseEntity<Map<String, Object>> deleteUser(UUID id) {
-
-
-
-        Map<String, Object> response = new HashMap<>();
-        if(!userRepository.existsById(id)){
-            response.put("message", "El usuario no existe");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isEmpty()){
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.NOT_FOUND.getKey(),
+                    Collections.emptyList(), HttpStatusResponse.NOT_FOUND.getCode());
         }
         try{
-            Optional<User> existingUser = userRepository.findById(id);
-            if (existingUser.isPresent()) {
-                User userEntity = existingUser.get();
+                User userEntity = userOptional.get();
                 userEntity.setIsActive(false);
                 userRepository.save(userEntity);
-                response.put("message", "El usuario se eliminó exitosamente");
-                response.put("bankAccount", userEntity);
-                return ResponseEntity.ok(response);
-            }
+                UserDto userDto = userMapper.toUserDto(userOptional.get());
+                return ResponseEntityCustom.builderResponse(HttpStatusResponse.DELETED.getKey(), userDto,
+                HttpStatusResponse.DELETED.getCode());
         }
         catch (Exception e){
-            response.put("message", "Error al eliminar el Usuario");
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+            return ResponseEntityCustom.builderResponse(HttpStatusResponse.INTERNAL_ERROR.getKey(),
+                    Collections.singletonList(e.getMessage()), HttpStatusResponse.INTERNAL_ERROR.getCode());
         }
-        response.put("message", "Error inesperado");
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-
-
     }
 }
