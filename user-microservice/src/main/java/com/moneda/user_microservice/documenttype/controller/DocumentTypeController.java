@@ -22,9 +22,7 @@ import java.util.UUID;
 @RequestMapping("/api/documentType")
 @AllArgsConstructor
 public class DocumentTypeController {
-
     private final DocumentTypeService documentTypeService;
-
 
     @Operation(summary = "Obtiene todos los Tipos de Documentos registrados")
     @ApiResponse(responseCode = "200", description = "Listado de tipos de documentos activos",
@@ -50,6 +48,9 @@ public class DocumentTypeController {
 
 
     @Operation(summary = "Actualiza un Tipo de Documento por Id")
+    @ApiResponse(responseCode = "200", description = "Tipo Documento Actualizada",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DocumentTypeDto.class)))
     @PutMapping("/update/{id}")
     public ResponseEntity<Map<String, Object>> updateDocumentType(@PathVariable UUID id, @RequestBody UpdateDocumentTypeDto updateDocumentTypeDto, BindingResult bindingResult){
         return documentTypeService.updateDocumentType(id, updateDocumentTypeDto, bindingResult);
@@ -60,12 +61,18 @@ public class DocumentTypeController {
 
 
     @Operation(summary = "Elimina un Tipo de Documento por Id (Eliminación Logica)")
+    @ApiResponse(responseCode = "200", description = "Tipo Documento Eliminada",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DocumentTypeDto.class)))
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, Object>> deleteDocumentType(@PathVariable UUID id) {
         return documentTypeService.deleteDocumentType(id);
     }
 
     @Operation(summary = "Obtiene un Tipo de Documento por Id")
+    @ApiResponse(responseCode = "200", description = "Tipo Documento encontrado por Id",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DocumentTypeDto.class)))
     @GetMapping("/get-by-id/{id}")
     public ResponseEntity<Map<String, Object>> getDocumentTypeById(@PathVariable UUID id) {
         return documentTypeService.getDocumentTypeById(id);

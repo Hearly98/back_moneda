@@ -19,10 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.UUID;
 
-
-
-
-
 @Controller
 @RequestMapping("/api/user")
 @AllArgsConstructor
@@ -50,26 +46,28 @@ public class UserController {
         return userService.saveUser(createUserDto, bindingResult);
     }
 
-
-
-
     @Operation(summary = "Actualiza un Usuario por Id")
+    @ApiResponse(responseCode = "200", description = "Usuario actualizado",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserDto.class)))
     @PutMapping("/update/{id}")
     public ResponseEntity<Map<String, Object>> updateUser(@PathVariable UUID id, @RequestBody UpdateUserDto updateUserDto, BindingResult bindingResult){
         return userService.updateUser(id, updateUserDto, bindingResult);
     }
 
-
-
-
-
     @Operation(summary = "Elimina un Usuario por Id (Eliminación Logica)")
+    @ApiResponse(responseCode = "200", description = "Usuario Eliminado",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserDto.class)))
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Map<String, Object>> deleteUser(@PathVariable UUID id) {
         return userService.deleteUser(id);
     }
 
     @Operation(summary = "Obtiene un Usuario por Id")
+    @ApiResponse(responseCode = "200", description = "Usuario encontrado por Id",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserDto.class)))
     @GetMapping("/get-by-id/{id}")
     public ResponseEntity<Map<String, Object>> getUserById(@PathVariable UUID id) {
         return userService.getUserById(id);
